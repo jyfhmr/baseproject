@@ -1,0 +1,13 @@
+.container-address-banks {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 10px;
+    width: 50vw;
+}
+
+.container-data-bank {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 10px;
+    width: 50vw;
+}

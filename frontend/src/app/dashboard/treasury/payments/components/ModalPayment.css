@@ -1,0 +1,15 @@
+.divOfSeparatedInfo{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    width: 90%;
+    margin: auto;
+}
+
+.titleOfThemes{
+    font-size: 18px;
+    font-weight: bolder;
+    margin-bottom: 1vh;
+    margin-top: 1vh;
+}

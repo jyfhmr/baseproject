@@ -1,0 +1,4 @@
+/* styles.css */
+:where(.css-dev-only-do-not-override-1okl62o) .ant-table-wrapper .ant-table .ant-table-body {
+    scrollbar-width: thin !important;
+}
