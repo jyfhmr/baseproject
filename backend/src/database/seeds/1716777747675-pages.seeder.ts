@@ -503,68 +503,199 @@ export class PagesSeeder1716777747675 implements Seeder {
             pagesAccountsPayableDocuments,
         );
 
-        const sentenciasPages = []
+        // Crear un array de meses para evitar repetición
+        const months = [
+            { name: 'Enero', route: 'enero' },
+            { name: 'Febrero', route: 'febrero' },
+            { name: 'Marzo', route: 'marzo' },
+            { name: 'Abril', route: 'abril' },
+            { name: 'Mayo', route: 'mayo' },
+            { name: 'Junio', route: 'junio' },
+            { name: 'Julio', route: 'julio' },
+            { name: 'Agosto', route: 'agosto' },
+            { name: 'Septiembre', route: 'septiembre' },
+            { name: 'Octubre', route: 'octubre' },
+            { name: 'Noviembre', route: 'noviembre' },
+            { name: 'Diciembre', route: 'diciembre' },
+        ];
+
+        // Crear un generador de meses para una sala específica
+        const generateMonthlyPages = (salaRoute: string) => {
+            return months.map((month) => ({
+                name: month.name,
+                route: `/dashboard/${salaRoute}/${month.route}`,
+                packages: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }],
+                application: { id: 1 },
+                user: { id: 1 },
+                userUpdate: { id: 1 },
+            }));
+        };
+
+        // Guardar las páginas de cada sala con los meses generados dinámicamente
+        const salaConstitucionalPages = generateMonthlyPages('constitucional');
+        const savedConstitucionalPages = await pageRepository.save(salaConstitucionalPages);
+
+        const salaPoliticoAdministrativaPages = generateMonthlyPages('politico_administrativa');
+        const savedPoliticoAdministrativaPages = await pageRepository.save(
+            salaPoliticoAdministrativaPages,
+        );
+
+        const salaElectoralPages = generateMonthlyPages('electoral');
+        const savedElectoralPages = await pageRepository.save(salaElectoralPages);
+
+        const salaCivilPages = generateMonthlyPages('civil');
+        const savedCivilPages = await pageRepository.save(salaCivilPages);
+
+        const salaPenalPages = generateMonthlyPages('penal');
+        const savedPenalPages = await pageRepository.save(salaPenalPages);
+
+        const salaSocialPages = generateMonthlyPages('social');
+        const savedSocialPages = await pageRepository.save(salaSocialPages);
+
+        const salaPlenaPages = generateMonthlyPages('plena');
+        const savedPlenaPages = await pageRepository.save(salaPlenaPages);
 
         const pagesFather = [
             {
-                name: 'Maestros',
-                route: '/dashboard/masters',
+                name: 'Sala Plena',
+                route: '/dashboard/plena',
                 packages: [{ id: 1 }],
                 application: { id: 1 },
                 user: { id: 1 },
                 icon: 'DatabaseOutlined',
                 userUpdate: { id: 1 },
-                order: 4,
-                pages: savedPagesMaestros,
+                order: 1,
+                pages: savedPlenaPages,
             },
+            {
+                name: 'Sala Constitucional',
+                route: '/dashboard/constitucional',
+                packages: [{ id: 1 }],
+                application: { id: 1 },
+                user: { id: 1 },
+                icon: 'BookOutlined', // Icono relacionado con la justicia
+                userUpdate: { id: 1 },
+                order: 2,
+                pages: savedConstitucionalPages,
+            },
+            {
+                name: 'Sala Político Administrativa',
+                route: '/dashboard/politico_administrativa',
+                packages: [{ id: 1 }],
+                application: { id: 1 },
+                user: { id: 1 },
+                icon: 'FileTextOutlined',
+                userUpdate: { id: 1 },
+                order: 3,
+                pages: savedPoliticoAdministrativaPages,
+            },
+            {
+                name: 'Sala Electoral',
+                route: '/dashboard/electoral',
+                packages: [{ id: 1 }],
+                application: { id: 1 },
+                user: { id: 1 },
+                icon: 'CheckCircleOutlined',
+                userUpdate: { id: 1 },
+                order: 4,
+                pages: savedElectoralPages,
+            },
+            {
+                name: 'Sala Civil',
+                route: '/dashboard/civil',
+                packages: [{ id: 1 }],
+                application: { id: 1 },
+                user: { id: 1 },
+                icon: 'UserOutlined',
+                userUpdate: { id: 1 },
+                order: 5,
+                pages: savedCivilPages,
+            },
+            {
+                name: 'Sala Penal',
+                route: '/dashboard/penal',
+                packages: [{ id: 1 }],
+                application: { id: 1 },
+                user: { id: 1 },
+                icon: 'ExclamationCircleOutlined',
+                userUpdate: { id: 1 },
+                order: 6,
+                pages: savedPenalPages,
+            },
+            {
+                name: 'Sala Social',
+                route: '/dashboard/social',
+                packages: [{ id: 1 }],
+                application: { id: 1 },
+                user: { id: 1 },
+                icon: 'TeamOutlined',
+                userUpdate: { id: 1 },
+                order: 7,
+                pages: savedSocialPages,
+            },
+            // {
+            //     name: 'Tesorería',
+            //     route: '/dashboard/treasury',
+            //     packages: [{ id: 1 }],
+            //     application: { id: 1 },
+            //     user: { id: 1 },
+            //     icon: 'FileOutlined',
+            //     userUpdate: { id: 1 },
+            //     order: 8, // Orden arbitrario para el resto de módulos
+            //     pages: savedPagesTreasury,
+            // },
+            // {
+            //     name: 'Inventario',
+            //     route: '/dashboard/inventory',
+            //     packages: [{ id: 1 }],
+            //     application: { id: 1 },
+            //     user: { id: 1 },
+            //     icon: 'ShoppingCartOutlined',
+            //     userUpdate: { id: 1 },
+            //     order: 9, // Orden arbitrario
+            //     pages: savedPagesInventory,
+            // },
+            // {
+            //     name: 'Cuentas por pagar',
+            //     route: '/dashboard/accounts_payable',
+            //     packages: [{ id: 1 }],
+            //     application: { id: 1 },
+            //     user: { id: 1 },
+            //     icon: 'ShoppingCartOutlined',
+            //     userUpdate: { id: 1 },
+            //     order: 10, // Orden arbitrario
+            //     pages: savedPagesAccountsPayableDocuments,
+            // },
+            // {
+            //     name: 'Maestros',
+            //     route: '/dashboard/masters',
+            //     packages: [{ id: 1 }],
+            //     application: { id: 1 },
+            //     user: { id: 1 },
+            //     icon: 'DatabaseOutlined',
+            //     userUpdate: { id: 1 },
+            //     order: 11, // Orden arbitrario
+            //     pages: savedPagesMaestros,
+            // },
             {
                 name: 'Configuración',
                 route: '/dashboard/config',
                 packages: [{ id: 1 }],
-                application: { id: 1 },
+                application:{ id: 1 },
                 user: { id: 1 },
-                userUpdate: { id: 1 },
-                order: 5,
                 icon: 'SettingOutlined',
+                userUpdate: { id: 1 },
+                order: 12, // Orden arbitrario
                 pages: savedPagesConfiguration,
             },
-            {
-                name: 'Tesorería',
-                route: '/dashboard/treasury',
-                packages: [{ id: 1 }],
-                application: { id: 1 },
-                user: { id: 1 },
-                userUpdate: { id: 1 },
-                icon: 'FileOutlined',
-                order: 1,
-                pages: savedPagesTreasury,
-            },
-            {
-                name: 'Inventario',
-                route: '/dashboard/inventory',
-                packages: [{ id: 1 }],
-                application: { id: 1 },
-                user: { id: 1 },
-                userUpdate: { id: 1 },
-                order: 2,
-                icon: 'ShoppingCartOutlined',
-                pages: savedPagesInventory,
-            },
-            {
-                name: 'Cuentas por pagar',
-                route: '/dashboard/accounts_payable',
-                packages: [{ id: 1 }],
-                application: { id: 1 },
-                user: { id: 1 },
-                userUpdate: { id: 1 },
-                order: 3,
-                icon: 'ShoppingCartOutlined',
-                pages: savedPagesAccountsPayableDocuments,
-            },
         ];
-
+        
+      
+        
+        
+        // Guardar la configuración principal con todas las salas y módulos
         const pagesFatherConfig = await pageRepository.save(pagesFather);
-
+        
         const profile = await profileRepository.findOne({ where: { id: 1 } });
 
         if (profile) {

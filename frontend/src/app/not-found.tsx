@@ -2,7 +2,7 @@
 import './globals.css';
 import Link from 'next/link';
 import Image from 'next/image';
-import GoPharma from '../../public/img/Logo-GoPharma-Rif-Vector.png';
+import GoPharma from '../../public/favicon.ico';
 
 export default function notFound() {
 

@@ -63,7 +63,7 @@ export default function Login() {
         >
             <div id="goPharmaTitleForResponsive">
                 <Image
-                    src="/img/Logo-GoPharma-Rif-Vector.png"
+                    src="/img/favicon.ico"
                     alt="products Marketplace"
                     placeholder="blur"
                     blurDataURL={'a'}

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import GoPharma from '../../public/img/Logo-GoPharma-Rif-Vector.png';
+import GoPharma from '../../public/favicon.ico';
 import '../app/globals.css';
 
 export default function Loading() {

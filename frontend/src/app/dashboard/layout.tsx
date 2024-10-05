@@ -52,7 +52,7 @@ const App = ({
                 redirect('/dashboard');
             }
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [actions]);
 
     useEffect(() => {
@@ -66,7 +66,7 @@ const App = ({
                 setMenu(get.menu);
             }
         } catch (error) {
-            console.error(error);;
+            console.error(error);
         }
     };
     Object.keys(Icons).forEach((key: any) => {
@@ -182,7 +182,9 @@ const App = ({
 
     const [stateOpenKeys, setStateOpenKeys] = useState(['2', '100']);
 
-    const className = `${collapsed ? 'width-80' : 'width-250'} ${!collapsed ? (isReversed ? 'right' : 'left') : ''}`;
+    const className = `${collapsed ? 'width-80' : 'width-250'} ${
+        !collapsed ? (isReversed ? 'right' : 'left') : ''
+    }`;
 
     const onOpenChange: MenuProps['onOpenChange'] = (openKeys) => {
         const currentOpenKey = openKeys.find((key) => stateOpenKeys.indexOf(key) === -1);
@@ -211,27 +213,27 @@ const App = ({
                 className={isReversed ? 'efectButtonOff' : 'efectButtonOn'}
                 style={{ minHeight: '100vh', height: 'auto' }}
             >
-                <Sider
-                    className={className}
-                    trigger={null}
-                    collapsible
-                    collapsed={collapsed}
-                >
+                <Sider className={className} trigger={null} collapsible collapsed={collapsed}>
+                    <div
+                        style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: "10px" }}
+                    >
+                        <Image
+                            src="/favicon.ico"
+                            className={
+                                ImgSidebar
+                                    ? 'animate__animated animate__fadeOut'
+                                    : 'animate__animated animate__fadeIn'
+                            }
+                            alt="gopharma-logo"
+                            style={{ display: ImgSidebar ? 'none' : 'block' , marginTop:"10px"}}
+                            width={100}
+                            height={100}
+                            quality={100}
+                        />
+                    </div>
+
                     <Image
-                        src="/img/Logo-GoPharma-Rif-Vector.png"
-                        className={
-                            ImgSidebar
-                                ? 'animate__animated animate__fadeOut'
-                                : 'animate__animated animate__fadeIn'
-                        }
-                        alt="gopharma-logo"
-                        style={{ display: ImgSidebar ? 'none' : 'block' }}
-                        width={200}
-                        height={120}
-                        quality={100}
-                    />
-                    <Image
-                        src="/img/img.png"
+                        src="/favicon.ico"
                         className={
                             collapsed
                                 ? 'animate__animated animate__fadeIn'
@@ -240,7 +242,7 @@ const App = ({
                         alt="gopharma-logo"
                         style={{ display: !ImgSidebar ? 'none' : 'block' }}
                         width={70}
-                        height={50}
+                        height={70}
                         quality={100}
                     />
                     <Menu
@@ -251,7 +253,7 @@ const App = ({
                         defaultSelectedKeys={['231']}
                         openKeys={stateOpenKeys}
                         onOpenChange={onOpenChange}
-                    // style={{ width: 256 }}
+                        // style={{ width: 256 }}
                     />
                 </Sider>
                 <Layout>
@@ -277,7 +279,7 @@ const App = ({
                     </Content>
                 </Layout>
             </Layout>
-        </ExchangeRateProvider >
+        </ExchangeRateProvider>
     );
 };
 
