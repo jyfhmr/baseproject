@@ -503,6 +503,8 @@ export class PagesSeeder1716777747675 implements Seeder {
             pagesAccountsPayableDocuments,
         );
 
+        const sentenciasPages = []
+
         const pagesFather = [
             {
                 name: 'Maestros',
