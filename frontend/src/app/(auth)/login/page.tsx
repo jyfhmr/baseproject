@@ -61,17 +61,18 @@ export default function Login() {
             autoComplete="off"
             size="large"
         >
-            <div id="goPharmaTitleForResponsive">
-                <Image
-                    src="/img/favicon.ico"
-                    alt="products Marketplace"
-                    placeholder="blur"
-                    blurDataURL={'a'}
-                    width={320}
-                    height={200}
-                    id="reset_password_image"
+           <div id="goPharmaTitleForResponsive">
+            <Image
+                src="/favicon.ico"
+                alt="products Marketplace"
+                placeholder="blur"
+                blurDataURL={'a'}
+                width={100}
+                height={100}
+                id="reset_password_image"
                 />
             </div>
+
 
             <div
                 className="formDivs"

@@ -20,6 +20,18 @@ export default class UserSeeder implements Seeder {
             description: 'Administrador',
         });
 
+
+        await repository.insert({
+            name: 'Carlos',
+            email: 'carlos@admin.com',
+            password: hashedPassword,
+            profile: profile,
+            fullName: 'Carlos Betancourt',
+            phoneNumber: '75675675',
+            dni: '123345656',
+        });
+
+
         await repository.insert({
             name: 'Alex',
             email: 'alex@admin.com',

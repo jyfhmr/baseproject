@@ -161,24 +161,7 @@ const HeaderComponent = ({ collapsed, toggleCollapse, onCollapsedChange, efectBu
                     className={isReversed ? 'efectButtonOnRever' : 'efectButtonOffRever'}
                 />
             </div>
-            <div className="marquee-container">
-                <div className="text-marquee">
-                    <div style={{color: '#000'}}>
-                        <img
-                            src={`${process.env.NEXT_PUBLIC_URL_IMAGE}uploads/money/${exchangeRates[0]?.currencyId?.file}`}
-                            style={{ width: '40px', height: '40px', borderRadius: '100%', objectFit: 'cover' }}
-                        />
-                        {(exchangeRates && exchangeRates[0]) ? exchangeRates[0].currencyId?.symbol + ":" : "Obteniendo tasas..."} {(exchangeRates && exchangeRates[0]) ? exchangeRates[0].exchange : ""}
-                    </div>
-                    <div style={{color: '#000'}}>
-                        <img
-                            src={`${process.env.NEXT_PUBLIC_URL_IMAGE}uploads/money/${exchangeRates[1]?.currencyId?.file}`}
-                            style={{ width: '40px', height: '40px', borderRadius: '100%', objectFit: 'cover' }}
-                        />
-                        {(exchangeRates && exchangeRates[1]) ? " " + exchangeRates[1].currencyId?.symbol + ":" : " Obteniendo tasas..."} {(exchangeRates && exchangeRates[1]) ? exchangeRates[1].exchange : ""}
-                    </div>
-                </div>
-            </div>
+
             <div className="Header_2" style={{ cursor: 'pointer', marginRight: "10px" }}>
                 <Dropdown menu={{ items }} placement="bottomRight" trigger={['click']}>
                     <div>
