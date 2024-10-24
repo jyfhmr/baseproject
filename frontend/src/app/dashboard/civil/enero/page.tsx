@@ -1,14 +1,20 @@
+'use client'
 import React from 'react';
-import { FrownOutlined } from '@ant-design/icons'; // Asegúrate de importar el ícono
+import { salasData } from '../../salasData1'; // Ajusta la ruta según sea necesario
+import SentencePage from '@/components/SentencePage';
+import columns from '@/components/columnsScheme';
+import { useSearchParams ,useRouter, useParams} from 'next/navigation';
 
-const NoSentencesPage: React.FC = () => {
-  return (
-    <div style={{ textAlign: 'center', marginTop: '50px' }}>
-      <h1>No hay Sentencias</h1>
-      <p>En este mes no se han registrado sentencias.</p>
-      <FrownOutlined style={{ fontSize: '64px', color: '#1890ff' }} /> {/* Aumenta el tamaño aquí */}
-    </div>
-  );
+// Obtener los datos para Enero de la sala Plena
+const JanuaryPage: React.FC = () => {
+  //const januaryData = salasData.Plena?.Enero ?? null; // Verificar si existen datos para enero
+
+  const sala = "Civil"
+  const month = "Enero"
+
+   const januaryData = (salasData as any )?.Civil.Enero
+
+return <SentencePage monthData={januaryData} title={`Sentencias de sala ${sala} - ${month}`} columns={columns} />;
 };
 
-export default NoSentencesPage;
+export default JanuaryPage;

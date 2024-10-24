@@ -1,66 +1,20 @@
+'use client'
 import React from 'react';
-import { Table } from 'antd';
 import { salasData } from '../../salasData1'; // Ajusta la ruta según sea necesario
+import SentencePage from '@/components/SentencePage';
+import columns from '@/components/columnsScheme';
+import { useSearchParams ,useRouter, useParams} from 'next/navigation';
 
-// Columnas para la tabla
-const columns = [
-  {
-    title: 'Fecha',
-    dataIndex: 'date',
-    key: 'date',
-  },
-  {
-    title: 'Número de Sentencia',
-    dataIndex: 'sentence_number',
-    key: 'sentence_number',
-  },
-  {
-    title: 'Número de Expediente',
-    dataIndex: 'proceedings_number',
-    key: 'proceedings_number',
-  },
-  {
-    title: 'Tipo de Procedimiento',
-    dataIndex: 'proceedings_type',
-    key: 'proceedings_type',
-  },
-  {
-    title: 'Partes',
-    dataIndex: 'parts',
-    key: 'parts',
-  },
-  {
-    title: 'Decisión',
-    dataIndex: 'choice',
-    key: 'choice',
-  },
-  {
-    title: 'Ponente',
-    dataIndex: 'speaker',
-    key: 'speaker',
-  },
-  { title: 'Enlace', dataIndex: 'url_content', key: 'url_content' },
-];
-
-// Obtener los datos para Febrero de la sala Plena
+// Obtener los datos para Enero de la sala Plena
 const FebruaryPage: React.FC = () => {
-  const februaryData = salasData.Civil.Febrero; // Accede a los datos de febrero directamente
+  //const januaryData = salasData.Plena?.Enero ?? null; // Verificar si existen datos para enero
 
-  // Formatear los datos para la tabla
-  const data = februaryData.flatMap(day => 
-    day.sentences.map((sentence) => ({
-      ...sentence,
-      date: day.date,
-      url_content: <a href={sentence.url_content} target="_blank" rel="noopener noreferrer">Ver Sentencia</a>,
-    }))
-  );
+  const sala = "Civil"
+  const month = "Febrero"
 
-  return (
-    <div>
-      <h1>Sentencias de Febrero</h1>
-      <Table columns={columns} dataSource={data} rowKey="sentence_number" />
-    </div>
-  );
+   const februaryData = (salasData as any )?.Civil.Febrero
+
+return <SentencePage monthData={februaryData} title={`Sentencias de sala ${sala} - ${month}`} columns={columns} />;
 };
 
 export default FebruaryPage;
