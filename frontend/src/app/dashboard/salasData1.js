@@ -23368,8 +23368,9 @@ const salasData = {
               ]
           },
       ]
-    }
+    },
+
   };
   
-  export { salasData };
+  export {salasData};
   

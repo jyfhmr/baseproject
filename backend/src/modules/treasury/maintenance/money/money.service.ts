@@ -40,6 +40,35 @@ export class MoneyService {
         return 'This action adds a new money';
     }
 
+
+
+    async getPaymentMethodRelatedToCertainCurrency(currencyId: number){
+
+        console.log("Buscando métodos de pago relacionados a cierta moneda...")
+
+       const searchedCurrency = await this.findOne(currencyId)
+
+       if(!searchedCurrency){
+        throw new HttpException("La moneda no existe",404)
+       }
+
+       const paymentMethodsWithTheSearchedCurrency= await this.moneyRepository.query(
+       `
+       SELECT pm.id,pm.method,pm.typeMethodPayment,pm.code FROM currencys_related_to_payment_methods crp 
+       INNER JOIN treasury_maintenance_payment_method pm
+       ON pm.id = crp.payment_method_id
+       WHERE crp.currency_id = ? AND pm.isActive = 1
+       `,
+        [currencyId],
+      );
+
+      console.log("Los métodos de pago coincidentes ",paymentMethodsWithTheSearchedCurrency)
+
+      return paymentMethodsWithTheSearchedCurrency
+
+    }
+
+
     async findAll(query: any): Promise<{ totalRows: number; data: Treasury_maintenance_Money[] }> {
         const take = query.rows || 5;
         const skip = query.page ? (query.page - 1) * take : 0;

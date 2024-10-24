@@ -62,6 +62,8 @@ import { ComissionPerPaymentMethodModule } from './modules/treasury/comission_pe
 import { InvoiceTypesModule } from './modules/config/administrative/invoice_types/invoice_types.module';
 import { DiscountTypesModule } from './modules/config/administrative/discount_types/discount_types.module';
 import { CorrelativeModule } from './modules/config/correlative/correlative.module';
+import { SentencesModule } from './modules/judis-mail/sentences/sentences.module';
+import { TypesOfSentencesModule } from './modules/judis-mail/types-of-sentences/types-of-sentences.module';
 
 @Module({
     imports: [
@@ -134,6 +136,8 @@ import { CorrelativeModule } from './modules/config/correlative/correlative.modu
         InvoiceTypesModule,
         DiscountTypesModule,
         CorrelativeModule,
+        SentencesModule,
+        TypesOfSentencesModule,
     ],
     providers: [
         {

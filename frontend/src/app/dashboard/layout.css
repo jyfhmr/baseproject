@@ -46,3 +46,27 @@ aside.width-250.left{
 .ant-menu.ant-menu-sub.ant-menu-vertical{
     scrollbar-width: thin !important;  
 }
+
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 300px; /* Ajusta este valor según tus necesidades */
+  }
+
+  .hola{
+    height: 100px !important;
+    overflow-y: auto;
+  }
+
+  .ant-table-tbody > tr > td {
+    height: 50px !important; /* Forzar la altura de las filas */
+    line-height: 20px !important; /* Ajustar la alineación de contenido */
+    overflow-y: auto;
+  }
+
+
+  .choicesStyles{
+    overflow-y: auto !important;
+    height: 100%;
+  }
