@@ -523,7 +523,7 @@ export class PagesSeeder1716777747675 implements Seeder {
         const generateMonthlyPages = (salaRoute: string) => {
             return months.map((month) => ({
                 name: month.name,
-                route: `/dashboard/${salaRoute}/${month.route}`,
+                route: `/dashboard/sentences/${salaRoute}/${month.route}`,
                 packages: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }],
                 application: { id: 1 },
                 user: { id: 1 },

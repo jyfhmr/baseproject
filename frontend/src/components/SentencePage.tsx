@@ -12,12 +12,14 @@ interface SentencePageProps {
 const SentencePage: React.FC<SentencePageProps> = ({ monthData, title, columns }) => {
   const data = formatSentences(monthData);
 
+  console.log("el titulo",title)
+
   if (!data) {
     console.log("no hay data xd")
     return (
       <div style={{ textAlign: 'center', width: "100%", height: "70vh", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column",  }}>
         <h1>No hay Sentencias</h1>
-        <p>En este mes no se han registrado sentencias.</p>
+        <p>No se encontraron sentencias para las {title} - 2024</p>
         <FrownOutlined style={{ fontSize: '64px', color: '#1890ff' }} />
       </div>
     );
