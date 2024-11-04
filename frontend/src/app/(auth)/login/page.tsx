@@ -62,15 +62,16 @@ export default function Login() {
             size="large"
         >
            <div id="goPharmaTitleForResponsive">
-            <Image
+           <Image
                 src="/favicon.ico"
                 alt="products Marketplace"
                 placeholder="blur"
-                blurDataURL={'a'}
+                blurDataURL="a"
                 width={100}
                 height={100}
                 id="reset_password_image"
-                />
+                className="responsive-image"
+            />
             </div>
 
 
