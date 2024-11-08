@@ -132,6 +132,11 @@ export default function Login() {
                 <Link href="request_password_reset">¿Olvidaste tu contraseña?</Link>
             </div>
 
+            <div className="forgotPassword">
+                <Link href="/subscription">¿Aún no tienes suscripción? Suscríbete aquí</Link>
+            </div>
+
+                    
             <Button
                 type="primary"
                 htmlType="submit"

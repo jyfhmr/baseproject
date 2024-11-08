@@ -11,25 +11,28 @@
     z-index: 100;
 }
 
-@media (max-width: 576px) {
-    .container {
-        width: 150px;
-    }
-    .img-gopharma {
-        height: 100px;
-        width: 150px;
-    }
-}
-@media (max-width: 768px) {
-    .container {
-        width: 180px;
-    }
-    .img-gopharma {
-        height: 120px;
-        width: 200px;
-    }
+.container {
+    width: 200px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+    filter: url("#goo");
+    animation: rotate-move 2s ease-in-out infinite;
 }
 
+.img-gopharma {
+    height: 150px;
+    width: 250px;
+    position: absolute;
+    top: 52%;
+    left: 48%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+    z-index: 100;
+    animation: img-opacity-scale 2s ease-in-out infinite;
+}
 
 .dot {
     width: 70px;
@@ -221,16 +224,12 @@
     height: auto;
 }
 
-@media (max-width: 576px) {
-    .containerNotFound {
-        padding: 1rem;
-    }
-    .text-3xl {
-        font-size: 1.5rem;
-    }
-    .text-indigo-600 {
-        font-size: 3em;
-    }
+.containerNotFound {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .grid {
@@ -464,13 +463,18 @@
     }
 }
 
-@media (max-width: 576px) {
-    .text-marquee {
-        font-size: 0.8rem;
-        animation-duration: 15s;
-    }
+.text-marquee {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    box-sizing: border-box;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-direction: row;
+    cursor: pointer;
+    animation: scrollText 20s linear infinite;
 }
-
 
 .text-marquee:hover {
     animation-play-state: paused;
@@ -490,12 +494,10 @@
     gap: 5px;
 }
 
-@media (max-width: 768px) {
-    .Header_2 {
-        flex-direction: column !important;
-    }
+.Header_2{
+    display: flex !important;
+    align-items: center !important;
 }
-
 
 /*
 .ant-layout-sider-children{
@@ -522,31 +524,3 @@
   *::-webkit-scrollbar-thumb:hover {
     background-color: rgba(0, 0, 0, 0.5) !important; /* Color más oscuro cuando el scroll es hover */
   }
-
-  .responsive-image {
-    width: 100px;
-    height: 100px;
-}
-
-@media (max-width: 768px) {
-    .responsive-image {
-        width: 80px;
-        height: 80px;
-    }
-}
-
-@media (max-width: 576px) {
-    .responsive-image {
-        width: 60px;
-        height: 60px;
-    }
-}
-@media (max-width: 576px) {
-    .ant-table {
-        font-size: 0.9rem;
-    }
-    .ant-table-thead > tr > th,
-    .ant-table-tbody > tr > td {
-        padding: 8px;
-    }
-}

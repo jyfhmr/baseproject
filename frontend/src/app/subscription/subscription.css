@@ -1,0 +1,40 @@
+/* Estilo principal del contenedor */
+.subscription-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 2em;
+  }
+  
+  /* Estilo para el formulario de registro */
+  .subscription-registration {
+    width: 60%;
+    padding: 1em;
+  }
+  
+  .subscription-registration h3 {
+    font-family: Arial, sans-serif;
+    margin-bottom: 1em;
+  }
+  
+  /* Estilo para el formulario de pago */
+  .subscription-payment {
+    width: 45%;
+    padding: 1em;
+  }
+  
+  .subscription-payment h3 {
+    font-family: Arial, sans-serif;
+    margin-bottom: 1em;
+  }
+  
+  /* Estilo para el contenedor de botones en el formulario de pago */
+  .subscription-buttons {
+    display: flex;
+    gap: 1em;
+    width: 100%;
+  }
+  
+  .subscription-buttons .ant-btn {
+    flex: 1;
+  }
+  
