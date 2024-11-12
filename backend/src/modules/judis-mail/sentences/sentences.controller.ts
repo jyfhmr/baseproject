@@ -2,7 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { SentencesService } from './sentences.service';
 import { CreateSentenceDto } from './dto/create-sentence.dto';
 import { UpdateSentenceDto } from './dto/update-sentence.dto';
+import { Public } from 'src/decorators/isPublic.decorator';
 
+@Public()
 @Controller('sentences')
 export class SentencesController {
   constructor(private readonly sentencesService: SentencesService) {}
@@ -15,6 +17,11 @@ export class SentencesController {
   @Get()
   findAll() {
     return this.sentencesService.findAll();
+  }
+
+  @Get("proof")
+  proof() {
+    return this.sentencesService.proof();
   }
 
   @Get(':id')
