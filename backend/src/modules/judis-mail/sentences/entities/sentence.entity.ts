@@ -14,7 +14,8 @@ export class Sentence {
     choice: string
 
     //conexion con la tabla pivote
-
+    @Column()
+    parts: string 
 
     @Column()
     exponent: string 
@@ -23,5 +24,9 @@ export class Sentence {
     url: string 
 
     @Column()
-    description: string
+    proceedings_number: string
+
+    @Column()
+    proceedings_type: string
+
 }
