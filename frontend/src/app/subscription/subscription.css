@@ -1,40 +1,93 @@
-/* Estilo principal del contenedor */
-.subscription-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 2em;
+.checkout-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  max-width: 800px;
+  margin: 5% auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.payment-title {
+  font-size: 20px;
+  color: #007bff;
+  margin-bottom: 16px;
+  text-align: center;
+  font-family: inherit;
+}
+
+.payment-form {
+  width: 100%;
+}
+
+.payment-methods {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: 16px; /* Espacio entre los botones */
+  flex-wrap: wrap; /* Permite que se ajusten en pantallas pequeñas */
+}
+
+.checkout-container .ant-radio-group {
+  display: flex; /* Hace que los botones se muestren en una línea horizontal */
+  justify-content: center; /* Centra los botones horizontalmente */
+  width: 100%; /* Hace que el grupo ocupe todo el ancho del contenedor */
+  gap: 16px; /* Añade espacio entre los botones (opcional) */
+}
+
+.payment-methods .ant-radio-button-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  width: 140px;
+  height: 140px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.payment-form-fields {
+  width: 100%;
+}
+
+.ant-form-item {
+  width: 100%;
+}
+
+.payment-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .checkout-container {
+    max-width: 100%;
+    padding: 10px;
   }
-  
-  /* Estilo para el formulario de registro */
-  .subscription-registration {
-    width: 60%;
-    padding: 1em;
+
+  .payment-form-fields {
+    max-width: 100%;
   }
-  
-  .subscription-registration h3 {
-    font-family: Arial, sans-serif;
-    margin-bottom: 1em;
+
+  .payment-methods {
+    flex-direction: column; /* Cambia a vertical en pantallas pequeñas */
   }
-  
-  /* Estilo para el formulario de pago */
-  .subscription-payment {
-    width: 45%;
-    padding: 1em;
-  }
-  
-  .subscription-payment h3 {
-    font-family: Arial, sans-serif;
-    margin-bottom: 1em;
-  }
-  
-  /* Estilo para el contenedor de botones en el formulario de pago */
-  .subscription-buttons {
-    display: flex;
-    gap: 1em;
-    width: 100%;
-  }
-  
-  .subscription-buttons .ant-btn {
-    flex: 1;
-  }
-  
+}
+
+.payment-icon {
+  width: 90px;
+  height: 40px;
+  margin-bottom: 8px;
+}
+
