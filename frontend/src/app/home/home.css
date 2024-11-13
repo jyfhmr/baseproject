@@ -1,0 +1,180 @@
+/* Estilo general */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+  
+.home-container {
+    color: #ffffff;
+    background-color: #282a36;
+}
+  
+/* Sección Hero */
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 100vh;
+    padding: 0 40px;
+    background-color: #5c228b;
+    color: #ffffff;
+}
+  
+.hero-content {
+    flex: 1;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 20px; /* Espacio para centrar más el contenido */
+}
+  
+.hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+  
+.hero-title {
+    font-size: 48px;
+    font-weight: bold;
+    margin: 0;
+}
+  
+.hero-description {
+    font-size: 18px;
+    margin: 20px 0;
+    max-width: 600px;
+}
+  
+.learn-more-button {
+    background-color: #ff007a;
+    border-color: #ff007a;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 200px;
+}
+  
+/* Sección de descripción */
+.description-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px;
+    background-color: #f4f4f4;
+    color: #000;
+}
+  
+.description-image {
+    max-width: 80%;
+    margin-bottom: 20px;
+}
+  
+.description-title {
+    font-size: 36px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+  
+.description-text {
+    font-size: 18px;
+    max-width: 800px;
+    text-align: center;
+    margin: 0 auto 20px; /* Espacio inferior entre el texto y el botón */
+}
+  
+.go-to-login-button {
+    font-size: 16px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #ffffff;
+    cursor: pointer;
+    margin-top: 20px; /* Espacio entre el texto de descripción y el botón */
+}
+
+/* Responsive Adjustments */
+
+/* Pantallas medianas (tabletas y laptops) */
+@media (max-width: 1024px) {
+    .hero-section {
+        flex-direction: column;
+        padding: 20px;
+    }
+    
+    .hero-content {
+        text-align: center;
+        padding-right: 0;
+    }
+
+    .hero-title {
+        font-size: 36px;
+    }
+
+    .hero-description {
+        font-size: 16px;
+        margin: 10px 0;
+    }
+
+    .learn-more-button {
+        width: auto;
+        padding: 10px 15px;
+    }
+
+    .description-title {
+        font-size: 30px;
+    }
+
+    .description-text {
+        font-size: 16px;
+    }
+}
+
+/* Pantallas pequeñas (móviles) */
+@media (max-width: 600px) {
+    .hero-section {
+        flex-direction: column;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .hero-title {
+        font-size: 28px;
+    }
+
+    .hero-description {
+        font-size: 14px;
+        margin: 10px 0;
+    }
+
+    .learn-more-button {
+        width: auto;
+        padding: 8px 12px;
+    }
+
+    .hero-image img {
+        max-width: 80%;
+        height: auto;
+    }
+
+    .description-title {
+        font-size: 24px;
+    }
+
+    .description-text {
+        font-size: 14px;
+    }
+
+    .description-image {
+        max-width: 90%;
+    }
+
+    .go-to-login-button {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+}
