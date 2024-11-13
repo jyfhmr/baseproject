@@ -110,6 +110,9 @@ export const getAllData = async (module: string, optionalQuery?: string) => {
     try {
         const route = `${process.env.API_URL}/${module}`;
         const res = await ApiClient.get(route);
+
+        console.log("la respuesta del backend",res)
+
         return res.data;
     } catch (error:any) {
         console.log("error buscando el modulo",module)

@@ -71,7 +71,7 @@ export default function CreateNewPassword() {
                 {contextHolder}
 
                 <div className="create_new_password_divs">
-                    <div className='create_new_password_title'>Cambiar contraseña</div>
+                    <div className='create_new_password_title' style={{backgroundColor: "#cf286a"}}>Cambiar contraseña</div>
                 </div>
 
 

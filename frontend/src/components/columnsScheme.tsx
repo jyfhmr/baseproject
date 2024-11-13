@@ -2,8 +2,9 @@
 const columns = [
     {
       title: 'Fecha',
-      dataIndex: 'date',
-      key: 'date',
+      dataIndex: 'dateE',
+      key: 'dateE',
+      type: 'date'
     },
     {
       title: 'Número de Sentencia',
@@ -42,21 +43,27 @@ const columns = [
     },
     {
       title: 'Ponente',
-      dataIndex: 'speaker',
-      key: 'speaker',
+      dataIndex: 'exponent',
+      key: 'exponent',
     },
     {
       title: 'Enlace',
-      dataIndex: 'url_content',
-      key: 'url_content',
+      dataIndex: 'url',
+      key: 'url',
       width: 30,
       // Aquí usas render para mostrar el enlace
-      render: (text: string) => (
-        <a href={text} target="_blank" rel="noopener noreferrer">
-          Ver Sentencia
-        </a>
-      ),
-    },
+      render: (text: string) => {
+        if (text === "No Disponible") {
+          return <div>Sin URL</div>; // Muestra "SIN URL" si el valor es "No Disponible"
+        }
+        return (
+          <a href={text} target="_blank" rel="noopener noreferrer" color="#cf286a" style={{color: "#cf286a"}}>
+            Ver Sentencia
+          </a>
+        );
+      },
+    }
+    
   ];
 
   export default columns

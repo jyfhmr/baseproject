@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { SentencesService } from './sentences.service';
 import { CreateSentenceDto } from './dto/create-sentence.dto';
 import { UpdateSentenceDto } from './dto/update-sentence.dto';
@@ -18,6 +18,12 @@ export class SentencesController {
   findAll() {
     return this.sentencesService.findAll();
   }
+
+  @Get("getFromSpecificSalaAndMonth")
+  findCertainSentences( @Query('sala') sala: string,  @Query('month') month:string) {
+    return this.sentencesService.findCertainSentences(sala,month);
+  }
+
 
   @Get("proof")
   proof() {

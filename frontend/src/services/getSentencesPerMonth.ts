@@ -1,5 +1,8 @@
 // services/sentenceService.ts
 export const formatSentences = (monthData: any[]) => {
+
+  console.log("month data",monthData)
+
     if (!monthData || monthData.length === 0) {
       return null;
     }

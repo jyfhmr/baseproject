@@ -88,7 +88,7 @@ const AccountDrawer: React.FC<{ children: any; userData: any }> = ({ children, u
                 extra={
                     <Space>
                         <Button onClick={handleSignOut}>Cerrar Sesión</Button>
-                        <Button type="primary" onClick={handleChangePass}>
+                        <Button type="primary" onClick={handleChangePass} style={{backgroundColor: "#cf286a"}}>
                             Cambiar Contraseña
                         </Button>
                     </Space>

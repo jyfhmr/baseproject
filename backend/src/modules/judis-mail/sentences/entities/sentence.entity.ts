@@ -29,4 +29,11 @@ export class Sentence {
     @Column()
     proceedings_type: string
 
+
+    @Column()
+    sala: string
+
+
+    @Column()
+    sentence_number: string
 }
