@@ -503,7 +503,7 @@
 .ant-layout-sider-children{
     overflow-y: scroll !important;
     height: 100vh !important;
-    background: #cf286a;
+
 }
 
     ::-webkit-scrollbar {
