@@ -8,6 +8,7 @@ import ButtonBack from '@/components/dashboard/ButtonBack';
 import SetPageInfo from '@/components/dashboard/SetPageInfo';
 import CheckBoxProfile from '@/components/dashboard/profile/CheckBoxProfile';
 import { createOrUpdate, getAllData, getOne } from '@/services';
+import Loading from '@/components/Loading';
 
 type FieldType = {
     profile: {
@@ -163,7 +164,7 @@ const ModuleForm = ({ params }: any) => {
     const items = steps.map((item) => ({ key: item.title, title: item.title }));
 
     return spinner ? (
-        <p>Loading...</p>
+        <Loading/>
     ) : (
         <Form
             form={form}

@@ -4,6 +4,7 @@ import { salasData } from '../../../salasData1';
 import SentencePage from '@/components/SentencePage';
 import columns from '@/components/columnsScheme';
 import { getSentencesPerMonthAndSalaFromBackend } from "@/services/getSentencesPerMonthAndSalaFromBackend"
+import Loading from '@/components/Loading';
 
 const MonthPage: React.FC = ({ params }: any) => {
     console.log("Los params", params);
@@ -39,7 +40,7 @@ const MonthPage: React.FC = ({ params }: any) => {
     }, [sala, month]); // Se ejecuta solo cuando cambia la sala o el mes
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <Loading/>;
     }
 
     if (error) {
