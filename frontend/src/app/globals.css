@@ -23,11 +23,11 @@
 }
 
 .img-gopharma {
-    height: 150px;
-    width: 250px;
+    height: 80px;
+    width: 80px;
     position: absolute;
-    top: 52%;
-    left: 48%;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
     margin: auto;
     z-index: 100;
@@ -54,22 +54,22 @@
 }
 
 .dot-1 {
-    background-color: #6B09BF;
+    background-color: #6b09bf;
     animation: dot-1-move 2s ease infinite, index 8s -1.5s ease infinite;
 }
 
 .dot-2 {
-    background-color: #163A73;
+    background-color: #6b09bf;
     animation: dot-2-move 2s ease infinite, index 8s -3s ease infinite;
 }
 
 .dot-3 {
-    background-color: #44A846;
+    background-color: #6b09bf;
     animation: dot-3-move 2s ease infinite, index 8s -4.5s ease infinite;
 }
 
 .dot-4 {
-    background-color: #F7C211;
+    background-color: #6b09bf;
     animation: dot-4-move 2s ease infinite, index 8s ease infinite;
 }
 
