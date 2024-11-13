@@ -54,7 +54,7 @@
 }
 
 .dot-1 {
-    background-color: #6b09bf;
+    background-color: #cf286a;
     animation: dot-1-move 2s ease infinite, index 8s -1.5s ease infinite;
 }
 
@@ -499,13 +499,14 @@
     align-items: center !important;
 }
 
-/*
+
 .ant-layout-sider-children{
     overflow-y: scroll !important;
     height: 100vh !important;
+    background: #cf286a;
 }
 
-    */*::-webkit-scrollbar {
+    ::-webkit-scrollbar {
     width: 8px !important;
     height: 8px !important;
   }
