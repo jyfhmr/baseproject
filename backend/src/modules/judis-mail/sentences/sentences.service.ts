@@ -4,7 +4,7 @@ import { UpdateSentenceDto } from './dto/update-sentence.dto';
 import salasData from './salasData';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Sentence } from './entities/sentence.entity';
-import { Repository } from 'typeorm';
+import { Between, Repository } from 'typeorm';
 import { TypesOfSentence } from '../types-of-sentences/entities/types-of-sentence.entity';
 
 @Injectable()
@@ -101,6 +101,39 @@ export class SentencesService {
                     }
                 }
             }
+        }
+    }
+
+
+   private async  getSentencesFromToday() {
+        try {
+          
+    
+            // Obtener la fecha actual
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // Establece la hora a 00:00:00 para que solo compare la fecha
+    
+            const tomorrow = new Date(today);
+            tomorrow.setDate(today.getDate() + 1); // Mañana para el rango
+    
+            // Buscar las sentencias que tienen createdAt en el rango de hoy
+            const sentences = await this.sentencesRepository.find({
+                where: {
+                    createdAt: Between(today, tomorrow), // Verifica si createdAt es entre hoy y mañana
+                },
+            });
+    
+            // Mostrar las sentencias que fueron creadas hoy
+            if (sentences.length > 0) {
+                console.log("Sentencias creadas hoy:", sentences);
+            } else {
+                console.log("No hay sentencias creadas hoy.");
+            }
+    
+            return sentences;
+        } catch (error) {
+            console.error("Error al obtener las sentencias:", error);
+            throw new Error("Error al obtener las sentencias");
         }
     }
     
