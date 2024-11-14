@@ -64,6 +64,7 @@ import { DiscountTypesModule } from './modules/config/administrative/discount_ty
 import { CorrelativeModule } from './modules/config/correlative/correlative.module';
 import { SentencesModule } from './modules/judis-mail/sentences/sentences.module';
 import { TypesOfSentencesModule } from './modules/judis-mail/types-of-sentences/types-of-sentences.module';
+import { PreferencesModule } from './modules/judis-mail/preferences/preferences.module';
 
 @Module({
     imports: [
@@ -138,6 +139,7 @@ import { TypesOfSentencesModule } from './modules/judis-mail/types-of-sentences/
         CorrelativeModule,
         SentencesModule,
         TypesOfSentencesModule,
+        PreferencesModule,
     ],
     providers: [
         {

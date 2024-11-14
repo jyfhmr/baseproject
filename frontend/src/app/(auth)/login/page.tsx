@@ -22,7 +22,7 @@ export default function Login() {
     const router = useRouter();
     const searchParams = useSearchParams();
     //const callbackUrl = searchParams.get('callbackUrl') || '/dashboard/actions';
-    const callbackUrl = '/dashboard/config/actions';
+    const callbackUrl = '/dashboard';
 
     const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
         setLoading(true);
