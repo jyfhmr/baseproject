@@ -60,7 +60,7 @@ aside.width-250.left{
   }
 
   .ant-table-tbody > tr > td {
-    height: 50px !important; /* Forzar la altura de las filas */
+    height: 0px !important; /* Forzar la altura de las filas */
     line-height: 20px !important; /* Ajustar la alineación de contenido */
     overflow-y: auto;
   }
