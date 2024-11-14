@@ -15,7 +15,7 @@ export class ScrappingServiceSchedulerService {
 
 
 
-  @Cron(CronExpression.EVERY_30_MINUTES)
+  @Cron(CronExpression.EVERY_10_HOURS)
   handleCron() {
     this.scrappingService.getExchangeRates().then((rates) => {
 

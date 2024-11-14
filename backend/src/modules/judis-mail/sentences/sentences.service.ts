@@ -40,58 +40,70 @@ export class SentencesService {
     async createSentences() {
         // Suponiendo que 'salasData' es un objeto con datos como el que describes
         for (let sala in salasData) {
-            console.log('las sala', sala);
-   
+            console.log('las salas', sala);
+    
             for (let month in salasData[sala]) {
-                console.log('el month', month);
-   
+                console.log('el mes', month);
+    
                 const objectWithSentencesPerMonthAndDate = salasData[sala][month];
-   
                 console.log(
-                    'objeto con dias y sentencias de esos dias',
+                    'objeto con días y sentencias de esos días',
                     objectWithSentencesPerMonthAndDate,
                 );
-   
+    
                 for (let day in objectWithSentencesPerMonthAndDate) {
                     console.log(
                         'Un día y sus sentencias ',
                         objectWithSentencesPerMonthAndDate[day],
                     );
-   
+    
                     const fechaCompleta = new Date(
                         2024, // Año
                         this.getMonthNumber(month), // Método que convierte el nombre del mes en número
                         objectWithSentencesPerMonthAndDate[day].date, // Día
                     );
-   
+    
                     const sentences = objectWithSentencesPerMonthAndDate[day].sentences;
-   
+    
                     for (let i = 0; i < sentences.length; i++) {
                         const sentence = sentences[i];
-   
+    
                         // Obtener el tipo de sentencia correspondiente (esto depende de cómo almacenes la relación)
                         const sentenceType = await this.typesOfSentenceRepository.findOne({
                             where: { type: sala }, // Buscar el tipo de sentencia por nombre de sala
                         });
-   
-                        const newSentence = this.sentencesRepository.create({
-                            dateE: fechaCompleta,
-                            choice: sentence.choice,
-                            exponent: sentence.speaker,
-                            url: sentence.url_content,
-                            parts: sentence.parts,
-                            proceedings_number: sentence.proceedings_number,
-                            proceedings_type: sentence.proceedings_type,
-                            type_of_sentence: sentenceType, // Aquí asignas el tipo de sentencia
-                            sentence_number: sentence.sentence_number,
+    
+                        // Buscar si la sentencia ya existe
+                        const existingSentence = await this.sentencesRepository.findOne({
+                            where: { sentence_number: sentence.sentence_number }, // Asumimos que 'sentence_number' es único
                         });
-   
-                        await this.sentencesRepository.save(newSentence);
+    
+                        if (existingSentence) {
+                            // Si la sentencia ya existe, podemos decidir si la actualizamos o no.
+                            console.log('La sentencia ya existe, no se crea nuevamente', existingSentence.sentence_number);
+                        } else {
+                            // Si no existe, se crea la nueva sentencia
+                            const newSentence = this.sentencesRepository.create({
+                                dateE: fechaCompleta,
+                                choice: sentence.choice,
+                                exponent: sentence.speaker,
+                                url: sentence.url_content,
+                                parts: sentence.parts,
+                                proceedings_number: sentence.proceedings_number,
+                                proceedings_type: sentence.proceedings_type,
+                                type_of_sentence: sentenceType, // Aquí asignas el tipo de sentencia
+                                sentence_number: sentence.sentence_number,
+                            });
+    
+                            await this.sentencesRepository.save(newSentence);
+                            console.log('Sentencia creada con éxito', sentence.sentence_number);
+                        }
                     }
                 }
             }
         }
     }
+    
    
     // Método para convertir el nombre del mes en su número correspondiente
     private getMonthNumber(month: string): number {
@@ -221,7 +233,7 @@ export class SentencesService {
       throw new Error('Error al obtener los datos de las sentencias.');
     }
   }
-  
+
 
 
     

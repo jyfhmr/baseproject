@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { TypesOfSentence } from '../../types-of-sentences/entities/types-of-sentence.entity';
 import { User } from 'src/modules/config/users/entities/user.entity';
 
@@ -41,5 +41,8 @@ export class Sentence {
 
     @ManyToOne(() => TypesOfSentence)
     type_of_sentence: TypesOfSentence;
+
+    @CreateDateColumn()
+    createdAt: Date;
 
 }
