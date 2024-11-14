@@ -11,7 +11,7 @@ export class SentencesService {
     constructor(
         @InjectRepository(Sentence) // Inyectar el repositorio
         private sentencesRepository: Repository<Sentence>,
-    ) { }
+    ) {}
 
     create(createSentenceDto: CreateSentenceDto) {
         return 'This action adds a new sentence';
@@ -84,7 +84,7 @@ export class SentencesService {
 
                     console.log(fechaCompleta);
 
-                    const sentences = objectWithSentencesPerMonthAndDate[day].sentences
+                    const sentences = objectWithSentencesPerMonthAndDate[day].sentences;
 
                     for (let i = 0; i < sentences.length; i++) {
                         let sentence = sentences[i];
@@ -98,13 +98,12 @@ export class SentencesService {
                             proceedings_number: sentence.proceedings_number,
                             proceedings_type: sentence.proceedings_type,
                             sala: sala,
-                            sentence_number: sentence.sentence_number
+                            sentence_number: sentence.sentence_number,
                         });
 
                         await this.sentencesRepository.save(newSentence);
 
-                        continue
-
+                        continue;
                     }
                 }
             }
@@ -117,60 +116,56 @@ export class SentencesService {
         this.createSentences();
     }
 
-
     async findCertainSentences(sala: string, month: string) {
-        console.log("Buscando para la sala y mes del año 2024", sala, month);
+        console.log('Buscando para la sala y mes del año 2024', sala, month);
+
+        if (sala === 'politico_administrativa') {
+            sala = 'PoliticoAdministrativa';
+        }
 
         try {
-            
+            // Mapa de los meses en español a sus valores numéricos correspondientes
+            const monthsMap: { [key: string]: number } = {
+                enero: 1,
+                febrero: 2,
+                marzo: 3,
+                abril: 4,
+                mayo: 5,
+                junio: 6,
+                julio: 7,
+                agosto: 8,
+                septiembre: 9,
+                octubre: 10,
+                noviembre: 11,
+                diciembre: 12,
+            };
 
-             // Mapa de los meses en español a sus valores numéricos correspondientes
-        const monthsMap: { [key: string]: number } = {
-            enero: 1,
-            febrero: 2,
-            marzo: 3,
-            abril: 4,
-            mayo: 5,
-            junio: 6,
-            julio: 7,
-            agosto: 8,
-            septiembre: 9,
-            octubre: 10,
-            noviembre: 11,
-            diciembre: 12
-        };
-    
-        // Verifica si el mes recibido es válido
-        const monthNumber = monthsMap[month];
-        if (!monthNumber) {
-            throw new Error(`Mes inválido: ${month}`);
-        }
-    
-        // Formato de la fecha para el filtro: '2024-MM-01'
-        const dateFilter = `2024-${monthNumber.toString().padStart(2, '0')}`;
-    
-        // Realiza la consulta filtrando por el año 2024 y el mes correspondiente
-        const sentencesThatMatch = await this.sentencesRepository.query(
-            `
+            // Verifica si el mes recibido es válido
+            const monthNumber = monthsMap[month];
+            if (!monthNumber) {
+                throw new Error(`Mes inválido: ${month}`);
+            }
+
+            // Formato de la fecha para el filtro: '2024-MM-01'
+            const dateFilter = `2024-${monthNumber.toString().padStart(2, '0')}`;
+
+            // Realiza la consulta filtrando por el año 2024 y el mes correspondiente
+            const sentencesThatMatch = await this.sentencesRepository.query(
+                `
             SELECT * 
             FROM sentence 
             WHERE sala = ? 
             AND DATE_FORMAT(dateE, '%Y-%m') = ?
             `,
-            [sala, dateFilter]
-        );
-    
-        console.log(sentencesThatMatch);
-        return sentencesThatMatch;
+                [sala, dateFilter],
+            );
 
+            console.log(sentencesThatMatch);
+            return sentencesThatMatch;
         } catch (error) {
+            console.log('el error en el backend', error);
 
-            console.log("el error en el backend",error)
-
-             throw new HttpException("Error fetching",500)
+            throw new HttpException('Error fetching', 500);
         }
-    
-       
     }
-    
 }
