@@ -1,4 +1,4 @@
 import { redirect } from 'next/navigation';
-const page = () => redirect('/dashboard');
+const page = () => redirect('/login');
 
 export default page;
