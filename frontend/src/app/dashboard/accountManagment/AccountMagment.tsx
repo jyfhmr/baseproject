@@ -44,8 +44,7 @@ const AccountDrawer: React.FC<{ children: any; userData: any }> = ({ children, u
                     description: userData.phoneNumber,
                     icon: <PhoneOutlined />,
                 },
-                { title: 'DNI', description: userData.dni, icon: <IdcardOutlined /> },
-                { title: 'Rol', description: userData.profile?.name, icon: <TeamOutlined /> },
+                { title: 'Cédula', description: userData.dni, icon: <IdcardOutlined /> },
             ]);
         }
     }, [userData]);
