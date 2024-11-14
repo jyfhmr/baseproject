@@ -83,23 +83,24 @@ export class PreferencesService {
   async getPreferencesByUserId(userId: number): Promise<string[]> {
     try {
       // Verificamos si el usuario existe
-      const user = await this.usersRepository.findOne({
-        where: { id: userId },
-      });
+      const user = await this.usersRepository.findOne({ where: { id: userId } });
       if (!user) {
         throw new HttpException('Usuario no encontrado', HttpStatus.NOT_FOUND);
       }
 
-      // Buscamos las preferencias asociadas al usuario
-      const preferences = await this.preferencesRepository.find({
-        where: { user }, // Filtro por el usuario
-        relations: ['preference'], // Traemos la relación de tipo de sentencia
-      });
+      // Buscar las preferencias asociadas al usuario, utilizando QueryBuilder
+      const preferences = await this.preferencesRepository
+        .createQueryBuilder('preferences')
+        .leftJoinAndSelect('preferences.preference', 'preference') // Relacionamos con la entidad 'TypesOfSentence'
+        .where('preferences.userId = :userId', { userId }) // Filtramos por el usuario
+        .getMany();
 
-      // Extraemos solo los nombres de las sentencias de las preferencias
-      const preferenceNames = preferences.map((preference) => preference.preference.type);
+      // Extraemos los tipos de sentencias de las preferencias encontradas
+      const preferenceNames = preferences.map(preference => preference.preference.type);
 
-      return preferenceNames; // Devolvemos un arreglo con los nombres de las sentencias
+      console.log('Retornando preferencias:', preferenceNames);
+
+      return preferenceNames; // Devolvemos un arreglo con los tipos de sentencias
     } catch (error) {
       console.error('Error al obtener las preferencias del usuario', error);
       throw new HttpException('Error al obtener las preferencias del usuario', HttpStatus.INTERNAL_SERVER_ERROR);
