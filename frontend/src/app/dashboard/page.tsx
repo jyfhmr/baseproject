@@ -1,8 +1,8 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import { Pie } from '@ant-design/plots';
-import { Card, Select, Row, Col } from 'antd';
-import { getPercentagesPerSala } from '@/services';
+import { Card, Select, Row, Col, Button } from 'antd';
+import { getPercentagesPerSala, savePreferences } from '@/services';
 
 const { Option } = Select;
 
@@ -22,12 +22,49 @@ const Home = () => {
       }
     };
 
+
+    // const fetchPreferences = async () => {
+    //   try {
+    //     const data = await getPreferences()
+    //     console.log("las preferencias",data)
+    //     //setPieData(data);
+    //   } catch (error) {
+    //     console.error('Error fetching sentence data:', error);
+    //   }
+    // };
+
+
     fetchSentencesData();
+    //fetchPreferences()
   }, []);
 
 
   const handlePreferencesChange = (value:any) => {
     setSelectedPreferences(value);
+  };
+
+  const handleSavePreferences = async () => {
+    if (selectedPreferences.length === 0) {
+      alert('Por favor, selecciona al menos una preferencia');
+      return;
+    }
+
+    try {
+
+      const responseForSavingPreferences = await savePreferences(selectedPreferences)
+
+      console.log("selected preferences",selectedPreferences)
+
+      console.log("response for saving preferences",responseForSavingPreferences)
+
+      if(responseForSavingPreferences){
+        alert("Preferencias guardadas")
+      }
+     
+    } catch (error) {
+      console.error('Error al enviar las preferencias', error);
+      alert('Hubo un error al guardar las preferencias');
+    }
   };
 
   const pieConfig = {
@@ -47,7 +84,7 @@ const Home = () => {
           <h2>Dashboard de Sentencias - JudisMail</h2>
         </Col>
         <Col span={12}>
-          <Card title="Distribución de Sentencias por Sala">
+          <Card title="Porcentaje de Sentencias del año actual">
             <Pie {...pieConfig} />
           </Card>
         </Col>
@@ -65,6 +102,7 @@ const Home = () => {
                 </Option>
               ))}
             </Select>
+            <Button type="primary" style={{backgroundColor: "#cf286a", marginTop:"10px"}}   onClick={handleSavePreferences}  >Guardar Preferencias</Button>
           </Card>
         </Col>
       </Row>

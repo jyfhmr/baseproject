@@ -142,6 +142,24 @@ export const getPercentagesPerSala = async () => {
 };
 
 
+export const savePreferences = async (preferenceArray:any) => {
+
+
+    try {
+        const route = `${process.env.API_URL}/preferences/save`;
+        const res = await ApiClient.post(route, preferenceArray);
+
+        console.log("la respuesta del backend",res)
+
+        return res.data;
+    } catch (error:any) {
+        console.log("error buscando el modulo",module)
+        console.log(error.message, error.response.data.message)
+    }
+   
+};
+
+
 
 export const sendResetPass = async (id: string) => {
     if (!id) {
