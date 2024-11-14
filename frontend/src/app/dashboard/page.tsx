@@ -27,16 +27,9 @@ const Home = () => {
     angleField: 'value',
     colorField: 'type',
     radius: 0.75,
-    label: {
-      type: 'outer',
-      content: '{name} {percentage}',
-    },
-    interactions: [
-      {
-        type: 'element-active',
-      },
-    ],
+   
   };
+  
 
   return (
     <div style={{ padding: '20px' }}>
