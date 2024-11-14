@@ -14,7 +14,7 @@ export default function Home() {
   };
 
   const handleGoToLogin = () => {
-    router.push("/dashboard");
+    router.push("/login");
   };
 
   return (
