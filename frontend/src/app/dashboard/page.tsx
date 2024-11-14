@@ -3,66 +3,56 @@ import React, { useEffect, useState } from 'react';
 import { Pie } from '@ant-design/plots';
 import { Card, Select, Row, Col, Button } from 'antd';
 import { getPercentagesPerSala, getPreferences, savePreferences } from '@/services';
+import { ToastContainer, toast } from 'react-toastify';
 
 const { Option } = Select;
 
 const Home = () => {
-  const [selectedPreferences, setSelectedPreferences] = useState([]); // Para almacenar las preferencias seleccionadas
-  const [preferencesFromServer, setPreferencesFromServer] = useState([]); // Para almacenar las preferencias del backend
+  const [selectedPreferences, setSelectedPreferences] = useState([]);
+  const [preferencesFromServer, setPreferencesFromServer] = useState([]);
   const [pieData, setPieData] = useState([]);
 
-  // Función para obtener los datos de las sentencias
   useEffect(() => {
     const fetchSentencesData = async () => {
       try {
-        const data = await getPercentagesPerSala()
-        console.log("la data", data)
+        const data = await getPercentagesPerSala();
         setPieData(data);
       } catch (error) {
-        console.error('Error fetching sentence data:', error);
+        toast.error('Error al obtener los datos de sentencias');
       }
     };
 
-    // Función para obtener las preferencias del usuario
     const fetchPreferences = async () => {
       try {
-        const data = await getPreferences(); // Asumiendo que este endpoint devuelve un array de tipos de sentencia
-        console.log("las preferencias", data);
-        setPreferencesFromServer(data); // Guardamos las preferencias en el estado
-        setSelectedPreferences(data); // Si el usuario ya tiene preferencias, las seteamos por defecto en el Select
+        const data = await getPreferences();
+        setPreferencesFromServer(data);
+        setSelectedPreferences(data);
       } catch (error) {
-        console.error('Error fetching preferences:', error);
+        toast.error('Error al obtener las preferencias del usuario');
       }
     };
 
     fetchSentencesData();
-    fetchPreferences(); // Llamamos a la función para obtener las preferencias al cargar el componente
+    fetchPreferences();
   }, []);
 
-  // Maneja el cambio de selección en el Select
-  const handlePreferencesChange = (value:any) => {
-    setSelectedPreferences(value); // Actualizamos las preferencias seleccionadas
+  const handlePreferencesChange = (value: any) => {
+    setSelectedPreferences(value);
   };
 
-  // Guarda las preferencias seleccionadas por el usuario
   const handleSavePreferences = async () => {
     if (selectedPreferences.length === 0) {
-      alert('Por favor, selecciona al menos una preferencia');
+      toast.warn('Por favor, selecciona al menos una preferencia');
       return;
     }
 
     try {
-      const responseForSavingPreferences = await savePreferences(selectedPreferences);
-      console.log("selected preferences", selectedPreferences);
-      console.log("response for saving preferences", responseForSavingPreferences);
-
-      if (responseForSavingPreferences) {
-        alert("Preferencias guardadas");
+      const response = await savePreferences(selectedPreferences);
+      if (response) {
+        toast.success('Preferencias guardadas con éxito');
       }
-
     } catch (error) {
-      console.error('Error al enviar las preferencias', error);
-      alert('Hubo un error al guardar las preferencias');
+      toast.error('Hubo un error al guardar las preferencias');
     }
   };
 
@@ -76,25 +66,27 @@ const Home = () => {
 
   return (
     <div style={{ padding: '20px' }}>
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
+      
+      <h2>Dashboard de Sentencias - JudisMail</h2>
+      
       <Row gutter={[16, 16]}>
-        <Col span={24}>
-          <h2>Dashboard de Sentencias - JudisMail</h2>
-        </Col>
         <Col span={12}>
           <Card title="Porcentaje de Sentencias del año actual">
             <Pie {...pieConfig} />
           </Card>
         </Col>
+        
         <Col span={12}>
           <Card title="Selecciona tus preferencias">
             <Select
               mode="multiple"
               placeholder="Selecciona tus preferencias"
               style={{ width: '100%' }}
-              value={selectedPreferences} // Establecemos el valor del Select como las preferencias seleccionadas
+              value={selectedPreferences}
               onChange={handlePreferencesChange}
             >
-              {pieData.map((item:any) => (
+              {pieData.map((item: any) => (
                 <Option key={item.type} value={item.type}>
                   {item.type}
                 </Option>
@@ -108,32 +100,29 @@ const Home = () => {
               Guardar Preferencias
             </Button>
           </Card>
-        </Col>
-      </Row>
 
-      <Row gutter={[16, 16]} style={{ marginTop: '20px' }}>
-        <Col span={8}>
-          <Card title="Sentencias este mes" bordered={false}>
-            <p>120</p>
-          </Card>
-        </Col>
-        <Col span={8}>
-          <Card title="Usuarios nuevos" bordered={false}>
-            <p>35</p>
-          </Card>
-        </Col>
-        <Col span={8}>
-          <Card title="Total de sentencias del año" bordered={false}>
-            <p>1,200</p>
-          </Card>
-        </Col>
-      </Row>
-
-      <Row style={{ marginTop: '20px' }}>
-        <Col span={24}>
-          <Card cover={<img alt="example" src="/path/to/your/image.jpg" />}>
-            <Card.Meta title="Imagen descriptiva" description="Descripción de la imagen o información relevante." />
-          </Card>
+          {/* Aquí agregamos las tarjetas directamente debajo de la selección de preferencias */}
+          <Row gutter={[, 16]} style={{ marginTop: '20px' }}>
+            <Col span={12}>
+              <Card title="Sentencias este mes" bordered={false}>
+                <p>120</p>
+              </Card>
+            </Col>
+            <Col span={12}>
+              <Card title="Usuarios nuevos" bordered={false}>
+                <p>35</p>
+              </Card>
+            </Col>
+            <Col span={24}>
+              <Card title="Total de sentencias del año" bordered={false}>
+                <p>1,200</p>
+              </Card>
+            </Col>
+            <Col span={24}>
+              <Card cover={<img alt="example" src="/img/prueba.jpg" />}>
+              </Card>
+            </Col>
+          </Row>
         </Col>
       </Row>
     </div>
