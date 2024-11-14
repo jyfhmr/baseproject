@@ -24,6 +24,11 @@ export class SentencesController {
     return this.sentencesService.findCertainSentences(sala,month);
   }
 
+  @Get('/sentences-by-sala')
+  async getSentencesBySala() {
+    return this.sentencesService.getSentencesBySala();
+  }
+
 
   @Get("proof")
   proof() {

@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { TypesOfSentence } from '../../types-of-sentences/entities/types-of-sentence.entity';
+import { User } from 'src/modules/config/users/entities/user.entity';
 
 @Entity()
 export class Sentence {
@@ -36,4 +38,8 @@ export class Sentence {
 
     @Column()
     sentence_number: string
+
+    @ManyToOne(() => TypesOfSentence)
+    type_of_sentence: TypesOfSentence;
+
 }

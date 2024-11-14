@@ -1,21 +1,30 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Pie } from '@ant-design/plots';
 import { Card, Select, Row, Col } from 'antd';
+import { getPercentagesPerSala } from '@/services';
 
 const { Option } = Select;
 
 const Home = () => {
   const [selectedPreferences, setSelectedPreferences] = useState([]);
+  const [pieData, setPieData] = useState([]);
 
-  // Example data for the pie chart
-  const data = [
-    { type: 'Sala Constitucional', value: 40 },
-    { type: 'Sala Político-Administrativa', value: 20 },
-    { type: 'Sala de Casación Civil', value: 15 },
-    { type: 'Sala de Casación Penal', value: 10 },
-    { type: 'Sala de Casación Social', value: 15 },
-  ];
+
+  useEffect(() => {
+    const fetchSentencesData = async () => {
+      try {
+        const data = await getPercentagesPerSala()
+        console.log("la data",data)
+        setPieData(data);
+      } catch (error) {
+        console.error('Error fetching sentence data:', error);
+      }
+    };
+
+    fetchSentencesData();
+  }, []);
+
 
   const handlePreferencesChange = (value:any) => {
     setSelectedPreferences(value);
@@ -23,7 +32,7 @@ const Home = () => {
 
   const pieConfig = {
     appendPadding: 10,
-    data,
+    data: pieData,
     angleField: 'value',
     colorField: 'type',
     radius: 0.75,
@@ -50,7 +59,7 @@ const Home = () => {
               style={{ width: '100%' }}
               onChange={handlePreferencesChange}
             >
-              {data.map((item) => (
+              {pieData.map((item:any) => (
                 <Option key={item.type} value={item.type}>
                   {item.type}
                 </Option>
