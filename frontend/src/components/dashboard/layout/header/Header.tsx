@@ -41,6 +41,10 @@ const HeaderComponent = ({ collapsed, toggleCollapse, onCollapsedChange, efectBu
         console.log('Button clicked');
     };
 
+    const handleNavigateToDashboard = () => {
+        router.push('/dashboard'); // Cambia '/dashboard' al path de tu dashboard si es diferente
+    };
+
     useEffect(() => {
         onCollapsedChange(collapsed);
     }, [collapsed, onCollapsedChange]);
@@ -160,6 +164,13 @@ const HeaderComponent = ({ collapsed, toggleCollapse, onCollapsedChange, efectBu
                     onClick={efectButton}
                     className={isReversed ? 'efectButtonOnRever' : 'efectButtonOffRever'}
                 />
+                 <Button
+                    type="primary"
+                    style={{ backgroundColor: "#cf286a", marginTop: "10px" }}
+                    onClick={handleNavigateToDashboard}
+                >
+                    Control de Sentencias
+                </Button>
             </div>
 
             <div className="Header_2" style={{ cursor: 'pointer', marginRight: "10px" }}>
