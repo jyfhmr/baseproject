@@ -6,6 +6,8 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
 import { join } from 'path';
 import { UsersModule } from 'src/modules/config/users/users.module';
 import { SocketModule } from 'src/socket/socket.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { preferences_per_user } from 'src/modules/judis-mail/preferences/entities/preference.entity';
 
 @Module({
     imports: [
@@ -14,10 +16,14 @@ import { SocketModule } from 'src/socket/socket.module';
                 host: 'smtp.gmail.com', // Servidor saliente SMTP
                 port: 465, // Puerto SMTP seguro (SSL/TLS)
                 secure: true, // true para SSL/TLS
-                auth: {
-                    user: 'gopharmapruebas1@gmail.com', // Tu nombre de usuario de correo electrónico
-                    pass: 'tjpr kxrf otsc fvns', // Tu contraseña de correo electrónico
-                },
+                // auth: {
+                //     user: 'gopharmapruebas1@gmail.com', // Tu nombre de usuario de correo electrónico
+                //     pass: 'tjpr kxrf otsc fvns', // Tu contraseña de correo electrónico
+                // },
+                auth:{
+                    user: "jyfhmr@gmail.com",
+                    pass: "gjdd efcf ggre xxpc"
+                }
             },
             template: {
                 dir: join(
@@ -38,6 +44,7 @@ import { SocketModule } from 'src/socket/socket.module';
         }),
         forwardRef(() => UsersModule),
         SocketModule,
+        TypeOrmModule.forFeature([preferences_per_user])
     ],
     controllers: [MailsController],
     providers: [MailsService],

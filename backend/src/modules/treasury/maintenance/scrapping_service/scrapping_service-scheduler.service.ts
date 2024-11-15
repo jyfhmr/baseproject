@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { ScrappingServiceService } from './scrapping_service.service';
 import { MailsService } from 'src/mails/mails.service';
 import { SocketGateway } from 'src/socket/socket/socket.gateway';
+import { SentencesService } from 'src/modules/judis-mail/sentences/sentences.service';
 
 
 @Injectable()
@@ -10,32 +11,43 @@ export class ScrappingServiceSchedulerService {
   constructor(
     private readonly scrappingService: ScrappingServiceService,
     private readonly mailsService: MailsService,
-    private readonly socketGateway: SocketGateway
+    private readonly socketGateway: SocketGateway,
+    @Inject(forwardRef(() => SentencesService))
+    private readonly sentencesService: SentencesService
   ) {}
 
 
 
+  //@Cron(CronExpression.EVERY_10_HOURS)
   @Cron(CronExpression.EVERY_10_HOURS)
-  handleCron() {
-    this.scrappingService.getExchangeRates().then((rates) => {
+  async handleCron() {
+    // this.scrappingService.getExchangeRates().then((rates) => {
 
-                if (rates.conn == 200) {
-                    // La conexión con el BCV fue exitosa
-                    this.logExchangeRateStatus(rates.usd, 'USD', rates.usdRate);
-                    this.logExchangeRateStatus(rates.eur, 'EUR', rates.eurRate);
-                } else if (rates.conn == 503) {
-                    //console.log('No se pudo establecer conexión con el BCV');
-                    //console.log(503)
-                    this.mailsService.sendExchangeRateChangeToAdmin('FAILED503');
-                } else if (rates.conn == 500) {
-                     //console.log(500)
-                    //console.log('Ocurrió un error inesperado ');
-                    this.mailsService.sendExchangeRateChangeToAdmin('FAILED500');
-                }
-            })
-            .catch((error) => {
-                console.error('Failed to fetch exchange rates:', error);
-            });
+    //             if (rates.conn == 200) {
+    //                 // La conexión con el BCV fue exitosa
+    //                 this.logExchangeRateStatus(rates.usd, 'USD', rates.usdRate);
+    //                 this.logExchangeRateStatus(rates.eur, 'EUR', rates.eurRate);
+    //             } else if (rates.conn == 503) {
+    //                 //console.log('No se pudo establecer conexión con el BCV');
+    //                 //console.log(503)
+    //                 this.mailsService.sendExchangeRateChangeToAdmin('FAILED503');
+    //             } else if (rates.conn == 500) {
+    //                  //console.log(500)
+    //                 //console.log('Ocurrió un error inesperado ');
+    //                 this.mailsService.sendExchangeRateChangeToAdmin('FAILED500');
+    //             }
+    //         })
+    //         .catch((error) => {
+    //             console.error('Failed to fetch exchange rates:', error);
+    //         });
+
+      console.log("ejecutando cronjob...")
+
+      const sentences = await this.sentencesService.getSentencesFromToday()
+
+      this.mailsService.sendTheSentences(sentences)
+
+
     }
 
   /**

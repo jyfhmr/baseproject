@@ -12,17 +12,16 @@ export class Sentence {
     @Column()
     dateE: Date
 
-    @Column()
+    @Column({ length: 700 })
     choice: string
 
-    //conexion con la tabla pivote
-    @Column()
+    @Column({ length: 700 })
     parts: string 
 
-    @Column()
+    @Column({ length: 500 })
     exponent: string 
 
-    @Column()
+    @Column({ length: 500 })
     url: string 
 
     @Column()
@@ -30,10 +29,6 @@ export class Sentence {
 
     @Column()
     proceedings_type: string
-
-
-    @Column()
-    sala: string
 
 
     @Column()

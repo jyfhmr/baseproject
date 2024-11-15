@@ -2,14 +2,32 @@
 import { verify } from '@/services';
 import { Button, Card } from 'antd';
 import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
 
 const page = async () => {
 
     const handleFetchClick = async () => {
+        toast.success('Iniciando proceso . . .: ');
         try {
             const response = await verify(); // URL de ejemplo
           
-            toast.success('Petición exitosa: ' + response.message);
+            console.log("la respuesta",response)
+            if(response.length > 0){
+                Swal.fire({
+                    title: "Existen nuevas sentencias",
+                    text: "Se te enviarán si entran en tus preferencias",
+                    icon: "success"
+                  });
+               
+            }else{
+                Swal.fire({
+                    title: "No hay nuevas sentencias",
+                    text: "Es una lástima",
+                    icon: "warning"
+                  });
+            }
+
+           
         } catch (error:any) {
             toast.error('Error al realizar la petición: ' + error.message);
         }

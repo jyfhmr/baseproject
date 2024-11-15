@@ -6,17 +6,22 @@ import * as jwt from 'jsonwebtoken';
 import { UsersService } from 'src/modules/config/users/users.service';
 import { User } from 'src/modules/config/users/entities/user.entity';
 import { SocketGateway } from 'src/socket/socket/socket.gateway';
+import { InjectRepository } from '@nestjs/typeorm';
+import { preferences_per_user } from 'src/modules/judis-mail/preferences/entities/preference.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class MailsService {
     private readonly jwtSecret = 'your-secret-key'; // Cambia esto a tu clave secreta
     private readonly tokenExpiration = '1h'; // Tiempo de expiración del token
-
+   
     constructor(
         private readonly mailerService: MailerService,
         @Inject(forwardRef(() => UsersService)) // Usa forwardRef aquí
         private readonly usersService: UsersService,
-        private readonly socketGateway: SocketGateway
+        private readonly socketGateway: SocketGateway,
+        @InjectRepository(preferences_per_user) // Inyectar el repositorio
+        private preferences_per_user: Repository<preferences_per_user>
     ) { }
 
     async create(userInfo: SendMailDto) {
@@ -255,6 +260,44 @@ export class MailsService {
         
        return 0
 
+    }
+
+    async sendTheSentences(sentences: any): Promise<void> {
+        for (const sentence of sentences) {
+            // Obtener los usuarios con la preferencia específica para el tipo de sentencia
+            const usersWithPreference = await this.preferences_per_user.find({
+                where: { preference: { id: sentence.type_of_sentence.id } },
+                relations: ['user'], // Asegurarte de traer la relación con el usuario
+            });
+
+            console.log("usuarios con las preferencias",usersWithPreference)
+    
+            for (const userPreference of usersWithPreference) {
+                const user = userPreference.user;
+    
+                console.log("el user",user)
+
+                // Enviar correo electrónico al usuario
+                const res = await this.mailerService.sendMail({
+                    to: user.email, // Asumimos que el usuario tiene un campo `email`
+                    from: 'gopharmapruebas1@gmail.com',
+                    subject: `Nueva sentencia disponible: ${sentence.sentence_number}`,
+                    template: './newSentenceNotification', // Ruta al archivo de plantilla de correo
+                    context: {
+                        date: sentence.dateE,
+                        choice: sentence.choice,
+                        parts: sentence.parts,
+                        exponent: sentence.exponent,
+                        url: sentence.url,
+                        proceedingsNumber: sentence.proceedings_number,
+                        proceedingsType: sentence.proceedings_type,
+                        typeOfSentence: sentence.type_of_sentence.type,
+                    },
+                });
+
+                console.log("respuesta al intentar enviar el correo",res)
+            }
+        }
     }
 
     findAll() {

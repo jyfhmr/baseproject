@@ -6,6 +6,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Sentence } from './entities/sentence.entity';
 import { Between, Repository } from 'typeorm';
 import { TypesOfSentence } from '../types-of-sentences/entities/types-of-sentence.entity';
+import { MailsService } from 'src/mails/mails.service';
 
 @Injectable()
 export class SentencesService {
@@ -14,7 +15,9 @@ export class SentencesService {
         private sentencesRepository: Repository<Sentence>,
 
         @InjectRepository(TypesOfSentence)
-        private typesOfSentenceRepository: Repository<TypesOfSentence>
+        private typesOfSentenceRepository: Repository<TypesOfSentence>,
+
+        private readonly mailsService: MailsService,
     ) {}
 
     create(createSentenceDto: CreateSentenceDto) {
@@ -106,6 +109,8 @@ export class SentencesService {
 
 
     async getSentencesFromToday() {
+
+        var sentencesToSend
         try {
             // Obtener la fecha actual al inicio del día (00:00:00)
             const today = new Date();
@@ -120,11 +125,13 @@ export class SentencesService {
                 where: {
                     dateE: Between(today, tomorrow), // Verifica si dateE está entre hoy y mañana
                 },
+                relations: ["type_of_sentence"]
             });
     
             // Mostrar las sentencias que fueron creadas hoy
             if (sentences.length > 0) {
                 console.log("Sentencias creadas hoy:", sentences);
+                sentencesToSend = sentences
             } else {
                 console.log("No hay sentencias creadas hoy.");
             }
@@ -133,6 +140,14 @@ export class SentencesService {
         } catch (error) {
             console.error("Error al obtener las sentencias:", error);
             throw new Error("Error al obtener las sentencias");
+        }finally{
+
+            if(sentencesToSend.length > 0){
+                console.log("enviando correo...")
+                this.mailsService.sendTheSentences(sentencesToSend)
+            }
+            
+
         }
     }
     

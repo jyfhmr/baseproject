@@ -64,7 +64,7 @@ export default class UserSeeder implements Seeder {
 
         await repository.insert({
             name: 'Jose',
-            email: 'jose@admin.com',
+            email: 'jyfhmr@gmail.com',
             password: hashedPassword,
             profile: profile,
             fullName: 'jose',
