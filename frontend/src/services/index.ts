@@ -179,6 +179,25 @@ export const getPreferences = async () => {
 };
 
 
+export const verify = async () => {
+
+    console.log("buscando preferencias")
+
+    try {
+        const route = `${process.env.API_URL}/sentences/verify`;
+        const res = await ApiClient.get(route);
+
+        console.log("la respuesta del backend de las preferencias",res.data)
+
+        return res.data;
+    } catch (error:any) {
+        console.log("error buscando el modulo",module)
+        console.log(error.message, error.response.data.message)
+    }
+   
+};
+
+
 export const sendResetPass = async (id: string) => {
     if (!id) {
         throw new Error('No user ID provided');

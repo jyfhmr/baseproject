@@ -105,21 +105,20 @@ export class SentencesService {
     }
 
 
-   private async  getSentencesFromToday() {
+    async getSentencesFromToday() {
         try {
-          
-    
-            // Obtener la fecha actual
+            // Obtener la fecha actual al inicio del día (00:00:00)
             const today = new Date();
-            today.setHours(0, 0, 0, 0); // Establece la hora a 00:00:00 para que solo compare la fecha
+            today.setHours(0, 0, 0, 0); // Inicio del día
     
+            // Obtener la fecha de mañana al inicio del día (para el rango)
             const tomorrow = new Date(today);
-            tomorrow.setDate(today.getDate() + 1); // Mañana para el rango
+            tomorrow.setDate(today.getDate() + 1); // Día siguiente
     
-            // Buscar las sentencias que tienen createdAt en el rango de hoy
+            // Buscar las sentencias que tienen dateE dentro del rango de hoy
             const sentences = await this.sentencesRepository.find({
                 where: {
-                    createdAt: Between(today, tomorrow), // Verifica si createdAt es entre hoy y mañana
+                    dateE: Between(today, tomorrow), // Verifica si dateE está entre hoy y mañana
                 },
             });
     

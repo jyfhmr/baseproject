@@ -119,8 +119,8 @@ const Home = () => {
               </Card>
             </Col>
             <Col span={24}>
-              <Card cover={<img alt="example" src="/img/prueba.jpg" />}>
-              </Card>
+             {/*<Card cover={<img alt="example" src="/img/prueba.jpg" />}>
+              </Card> */} 
             </Col>
           </Row>
         </Col>

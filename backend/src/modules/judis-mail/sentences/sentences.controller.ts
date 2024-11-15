@@ -19,6 +19,11 @@ export class SentencesController {
     return this.sentencesService.findAll();
   }
 
+  @Get("verify")
+  verify() {
+    return this.sentencesService.getSentencesFromToday();
+  }
+
   @Get("getFromSpecificSalaAndMonth")
   findCertainSentences( @Query('sala') sala: string,  @Query('month') month:string) {
     return this.sentencesService.findCertainSentences(sala,month);
